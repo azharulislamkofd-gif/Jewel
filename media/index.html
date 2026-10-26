@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Media Downloads — Jewel</title>
+<style>
+  :root{
+    --bg:#07090d; --line:#1c2431;
+    --cyan:#22d3ee; --magenta:#e879f9;
+    --txt:#e6edf3; --mut:#8b98a9;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:
+      radial-gradient(900px 500px at 12% -8%, rgba(34,211,238,.16), transparent 60%),
+      radial-gradient(800px 520px at 92% 4%, rgba(232,121,249,.14), transparent 62%),
+      var(--bg);
+    color:var(--txt);
+    font:15px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans Bengali",sans-serif;
+    min-height:100vh; padding:40px 20px 80px;
+  }
+  .wrap{max-width:1040px;margin:0 auto}
+  h1{
+    font-size:clamp(26px,4.4vw,42px); margin:0 0 6px; letter-spacing:-.02em; font-weight:750;
+    background:linear-gradient(92deg,var(--cyan),#a5f3fc 38%,var(--magenta));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .sub{color:var(--mut); margin:0 0 30px; font-size:14.5px}
+  .card{
+    background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.012));
+    border:1px solid var(--line); border-radius:16px; padding:18px; margin-bottom:22px;
+    box-shadow:0 20px 50px rgba(0,0,0,.45);
+  }
+  .card h2{margin:0 0 4px; font-size:18px; letter-spacing:-.01em}
+  .meta{color:var(--mut); font-size:13px; margin:0 0 14px}
+  video{width:100%; border-radius:12px; background:#000; display:block; border:1px solid var(--line)}
+  .btns{display:flex; flex-wrap:wrap; gap:10px; margin-top:14px}
+  a.btn{
+    display:inline-flex; align-items:center; gap:8px; text-decoration:none;
+    padding:10px 16px; border-radius:10px; font-weight:600; font-size:14px;
+    border:1px solid var(--line); color:var(--txt); background:#111823; transition:.18s;
+  }
+  a.btn:hover{transform:translateY(-1px); border-color:rgba(34,211,238,.55); box-shadow:0 0 0 3px rgba(34,211,238,.12)}
+  a.btn.primary{
+    background:linear-gradient(92deg,rgba(34,211,238,.22),rgba(232,121,249,.22));
+    border-color:rgba(34,211,238,.5);
+  }
+  table{width:100%; border-collapse:collapse; font-size:14px}
+  th,td{text-align:left; padding:11px 10px; border-bottom:1px solid var(--line)}
+  th{color:var(--mut); font-weight:600; font-size:12px; text-transform:uppercase; letter-spacing:.07em}
+  tr:last-child td{border-bottom:0}
+  td.size,th.size{text-align:right; color:var(--mut); white-space:nowrap}
+  .tag{
+    display:inline-block; font-size:11px; padding:2px 8px; border-radius:999px;
+    border:1px solid rgba(34,211,238,.35); color:var(--cyan); margin-left:8px; vertical-align:middle;
+  }
+  .note{border-color:rgba(251,191,36,.35); background:rgba(251,191,36,.06)}
+  .note h2{color:#fbbf24}
+  code{background:#111823; padding:2px 6px; border-radius:5px; font-size:13px}
+  footer{color:var(--mut); font-size:12.5px; margin-top:26px; text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Media Downloads</h1>
+  <p class="sub">যেকোনো <strong>Download</strong> বাটনে ক্লিক করলেই ফাইলটা আপনার ডিভাইসে সেভ হবে।</p>
+
+  <div class="card">
+    <h2>Tech Review Studio <span class="tag">MP4 · 1920×1080 · 30fps · ~28s</span></h2>
+    <p class="meta">ফিউচারিস্টিক স্টুডিও স্টিল থেকে বানানো সিনেমাটিক সিকোয়েন্স — ৫টা ক্যামেরা মুভ, fade-in/fade-out, অডিও ট্র্যাক নেই।</p>
+    <video src="tech_review_cinematic.mp4" controls playsinline preload="metadata" poster="tech_review_studio.png"></video>
+    <div class="btns">
+      <a class="btn primary" href="tech_review_cinematic.mp4" download>⬇ Download MP4</a>
+      <a class="btn" href="tech_review_studio.png" download>⬇ Download still (PNG)</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Rock Singer — Live Stage <span class="tag">MP4 · 1920×1080 · 30fps · ~28s</span></h2>
+    <p class="meta">কনসার্ট স্টেজের স্টিল থেকে বানানো একই স্টাইলের ক্যামেরা-মোশন সিকোয়েন্স।</p>
+    <video src="rock_singer_cinematic.mp4" controls playsinline preload="metadata" poster="rock_singer_stage.png"></video>
+    <div class="btns">
+      <a class="btn primary" href="rock_singer_cinematic.mp4" download>⬇ Download MP4</a>
+      <a class="btn" href="rock_singer_stage.png" download>⬇ Download still (PNG)</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>সব ফাইল</h2>
+    <table>
+      <thead><tr><th>File</th><th>Type</th><th class="size">Size</th></tr></thead>
+      <tbody>
+        <tr><td><a href="tech_review_cinematic.mp4" download>tech_review_cinematic.mp4</a></td><td>Video</td><td class="size" data-size="tech_review_cinematic.mp4">—</td></tr>
+        <tr><td><a href="rock_singer_cinematic.mp4" download>rock_singer_cinematic.mp4</a></td><td>Video</td><td class="size" data-size="rock_singer_cinematic.mp4">—</td></tr>
+        <tr><td><a href="tech_review_studio.png" download>tech_review_studio.png</a></td><td>Image</td><td class="size" data-size="tech_review_studio.png">—</td></tr>
+        <tr><td><a href="rock_singer_stage.png" download>rock_singer_stage.png</a></td><td>Image</td><td class="size" data-size="rock_singer_stage.png">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card note">
+    <h2>⚠️ লিংক বদলে গেলে</h2>
+    <p class="meta" style="margin-bottom:8px">
+      স্যান্ডবক্স রিস্টার্ট হলে প্রিভিউ হোস্টের ID বদলে যায়, ফলে পুরনো লিংক আর কাজ করে না।
+      ফাইলগুলো এখন git-এ কমিট করা আছে (<code>media/</code>), তাই হারাবে না।
+      নতুন লিংক দরকার হলে এই কমান্ডটা চালিয়ে আমাকে বলুন:
+    </p>
+    <p class="meta" style="margin:0"><code>bash tools/serve_downloads.sh</code></p>
+  </div>
+
+  <footer>Served from <code>/media</code> · branch <code>arena/413b5762-jewel</code></footer>
+</div>
+<script>
+document.querySelectorAll('[data-size]').forEach(async (el) => {
+  try {
+    const r = await fetch(el.dataset.size, { method: 'HEAD' });
+    const len = Number(r.headers.get('Content-Length') || 0);
+    if (len) el.textContent = len > 1048576 ? (len/1048576).toFixed(1)+' MB' : Math.round(len/1024)+' KB';
+  } catch (e) {}
+});
+</script>
+</body>
+</html>
