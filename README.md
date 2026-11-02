@@ -42,12 +42,39 @@ master). The full brief and the method are in
 ## Serving / downloads
 
 ```bash
-bash tools/serve_downloads.sh            # install deps, build missing renders, serve media/ on 0.0.0.0:8000
-bash tools/serve_downloads.sh --build    # rebuild only, no server
-bash tools/serve_downloads.sh --force    # re-render everything
+bash tools/serve_downloads.sh            # build ONLY if an MP4 is missing, then serve on 0.0.0.0:8000
+bash tools/serve_downloads.sh --build    # build only, no server
+bash tools/serve_downloads.sh --force    # explicitly re-render everything
 ```
 
+The default path **does not regenerate** `media/rock_singer_live_concert.mp4`
+when it already exists — it prints the absolute path and size and moves on.
+
 Open `media/index.html` through that server for the preview and download links.
+The large **Download Video** button at the top of the page points at the real
+rendered file:
+
+| What | Where |
+| --- | --- |
+| File on disk | `/home/user/Jewel/media/rock_singer_live_concert.mp4` |
+| Button target | `download/rock_singer_live_concert.mp4` |
+| Direct download URL | `/download/video` (alias) or `/download/rock_singer_live_concert.mp4` |
+| File check API | `/api/video` (returns path, size, MIME, `verified_mp4`) |
+
+`tools/serve_downloads.py` replaces `python3 -m http.server` because Android
+mobile Chrome needs three things a bare static server does not provide:
+
+- `Content-Disposition: attachment` on the download routes — otherwise Chrome
+  opens `video/mp4` in its inline player instead of saving it;
+- `Accept-Ranges: bytes` / `206 Partial Content` and an exact `Content-Length`,
+  which Android's download manager and `<video>` element both rely on;
+- a guard that only serves real media files from `media/` and checks the MP4
+  `ftyp` box. Requests for `*.py` / `*.sh` are refused (403), so a source file
+  can never be returned in place of the video.
+
+The button uses a same-origin `<a download="...mp4" type="video/mp4">` with a
+56 px touch target, no hover-only state, and a JS fallback for hosts without the
+`/download` route; it also displays the verified on-disk path and size.
 
 ## Older renders
 

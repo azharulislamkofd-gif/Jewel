@@ -36,3 +36,7 @@ google-services.json
 
 # Scratch output (regenerable); tracked assets live in media/
 downloads/
+
+# Python scratch (regenerable)
+__pycache__/
+*.py[cod]

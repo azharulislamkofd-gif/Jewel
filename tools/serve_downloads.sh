@@ -2,8 +2,10 @@
 # Rebuild the media folder and serve it for download.
 #
 # Media files are tracked in git under media/ so they survive a sandbox restart.
-# This script (re)installs deps, (re)renders the videos if missing, and starts
-# the HTTP server on 0.0.0.0:8000.
+# This script (re)installs deps, (re)renders the videos ONLY if missing, and
+# starts tools/serve_downloads.py on 0.0.0.0:8000.  That server sends
+# Content-Disposition: attachment + Range/206 support, so Android Chrome saves
+# the MP4 instead of opening it in a video player.
 #
 #   bash tools/serve_downloads.sh            # build (if needed) + serve
 #   bash tools/serve_downloads.sh --build    # build only, no server
@@ -46,8 +48,10 @@ done
 
 # Concert brief: procedural animation from the portrait still (1080p master + 4K).
 if [[ -f "$CONCERT_SRC" ]]; then
-  if [[ -f "$CONCERT_OUT" && -f "$CONCERT_4K" && "$MODE" != "--force" ]]; then
-    echo "  exists: $CONCERT_OUT + $CONCERT_4K (use --force to re-render)"
+  if [[ -s "$CONCERT_OUT" && -s "$CONCERT_4K" && "$MODE" != "--force" ]]; then
+    echo "  existing MP4 found: $(realpath "$CONCERT_OUT")"
+    echo "    $(stat -c '%s bytes' "$CONCERT_OUT") · script already executed — NOT regenerating"
+    echo "  existing 4K found: $(realpath "$CONCERT_4K") ($(stat -c '%s bytes' "$CONCERT_4K"))"
   else
     python3 tools/make_concert_video.py "$CONCERT_SRC" "$CONCERT_OUT" \
       --seconds 20 --fps 30 --crf 18 --preset fast \
@@ -65,6 +69,5 @@ if [[ "$MODE" == "--build" ]]; then
   exit 0
 fi
 
-echo "[4/4] serving ${MEDIA_DIR}/ on 0.0.0.0:${PORT}"
-cd "$MEDIA_DIR"
-exec python3 -u -m http.server "$PORT" --bind 0.0.0.0
+echo "[4/4] serving ${MEDIA_DIR}/ on 0.0.0.0:${PORT} (Android-safe downloads)"
+exec python3 -u tools/serve_downloads.py --dir "$MEDIA_DIR" --host 0.0.0.0 --port "$PORT"
