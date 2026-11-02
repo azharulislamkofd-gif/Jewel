@@ -66,6 +66,28 @@
   <h1>Media Downloads</h1>
   <p class="sub">যেকোনো <strong>Download</strong> বাটনে ক্লিক করলেই ফাইলটা আপনার ডিভাইসে সেভ হবে।</p>
 
+  <div class="card" style="border-color:rgba(34,211,238,.42);box-shadow:0 20px 60px rgba(34,211,238,.09),0 20px 50px rgba(0,0,0,.45)">
+    <h2>Rock Singer — Live Concert (নতুন) <span class="tag">MP4 · 1080p + 4K · 30fps · 20s</span></h2>
+    <p class="meta">
+      নতুন পোর্ট্রেট স্টিল থেকে বানানো ২০ সেকেন্ডের সিনেমাটিক সিকোয়েন্স — ধীর ক্যামেরা অরবিট ও সামান্য পুশ-ইন,
+      নীল ও সোনালি স্পটলাইট প্যান, মেঝেতে ভাসমান ধোঁয়া, পাশে ঝলমলে স্পার্ক, তালে-তালে জ্বলজ্বল করা দর্শকের আলো,
+      আর চুল ও লেদার স্কার্ট-কোটে হালকা বাতাসের নড়াচড়া। পুরো শরীর ফ্রেমে থাকার জন্য পাশে ডি-ফোকাসড স্টেজ ব্যাকড্রপ দেওয়া হয়েছে।
+      <strong>অডিও ট্র্যাক নেই।</strong>
+    </p>
+    <video src="rock_singer_live_concert.mp4" controls playsinline preload="metadata" poster="rock_singer_live_concert_poster.jpg"></video>
+    <div class="btns">
+      <a class="btn primary" href="rock_singer_live_concert.mp4" download>⬇ Download 1080p MP4</a>
+      <a class="btn primary" href="rock_singer_live_concert_4k.mp4" download>⬇ Download 4K MP4</a>
+      <a class="btn" href="rock_singer_concert_still.jpg" download>⬇ Source still (JPG)</a>
+      <a class="btn" href="rock_singer_live_concert_poster.jpg" download>⬇ Poster (JPG)</a>
+      <a class="btn" href="rock_singer_live_concert_prompt.txt" target="_blank">📄 Prompt &amp; method</a>
+    </div>
+    <p class="meta" style="margin:12px 0 0;font-size:12.5px">
+      4K ফাইলটি 1080p মাস্টার থেকে Lanczos আপস্কেল করা — মূল স্টিল ৮৪৩×১২৬৪ পিক্সেল হওয়ায় সূক্ষ্ম ডিটেইল সীমিত।
+      এটি জেনারেটিভ ভিডিও মডেল নয়; একটি স্টিল থেকে প্রসিডিউরাল অ্যানিমেশন, তাই নতুন শারীরিক মুভমেন্ট বা গানের অডিও যোগ করা হয়নি।
+    </p>
+  </div>
+
   <div class="card">
     <h2>Tech Review Studio <span class="tag">MP4 · 1920×1080 · 30fps · ~28s</span></h2>
     <p class="meta">ফিউচারিস্টিক স্টুডিও স্টিল থেকে বানানো সিনেমাটিক সিকোয়েন্স — ৫টা ক্যামেরা মুভ, fade-in/fade-out, অডিও ট্র্যাক নেই।</p>
@@ -108,6 +130,11 @@
     <table>
       <thead><tr><th>File</th><th>Type</th><th class="size">Size</th></tr></thead>
       <tbody>
+        <tr><td><a href="rock_singer_live_concert.mp4" download>rock_singer_live_concert.mp4</a></td><td>Video · 1080p</td><td class="size" data-size="rock_singer_live_concert.mp4">—</td></tr>
+        <tr><td><a href="rock_singer_live_concert_4k.mp4" download>rock_singer_live_concert_4k.mp4</a></td><td>Video · 4K</td><td class="size" data-size="rock_singer_live_concert_4k.mp4">—</td></tr>
+        <tr><td><a href="rock_singer_live_concert_poster.jpg" download>rock_singer_live_concert_poster.jpg</a></td><td>Image</td><td class="size" data-size="rock_singer_live_concert_poster.jpg">—</td></tr>
+        <tr><td><a href="rock_singer_concert_still.jpg" download>rock_singer_concert_still.jpg</a></td><td>Image</td><td class="size" data-size="rock_singer_concert_still.jpg">—</td></tr>
+        <tr><td><a href="rock_singer_live_concert_prompt.txt" download>rock_singer_live_concert_prompt.txt</a></td><td>Text</td><td class="size" data-size="rock_singer_live_concert_prompt.txt">—</td></tr>
         <tr><td><a href="tech_review_cinematic.mp4" download>tech_review_cinematic.mp4</a></td><td>Video</td><td class="size" data-size="tech_review_cinematic.mp4">—</td></tr>
         <tr><td><a href="rock_singer_cinematic.mp4" download>rock_singer_cinematic.mp4</a></td><td>Video</td><td class="size" data-size="rock_singer_cinematic.mp4">—</td></tr>
         <tr><td><a href="tech_review_studio.png" download>tech_review_studio.png</a></td><td>Image</td><td class="size" data-size="tech_review_studio.png">—</td></tr>
@@ -123,10 +150,10 @@
       ফাইলগুলো এখন git-এ কমিট করা আছে (<code>media/</code>), তাই হারাবে না।
       নতুন লিংক দরকার হলে এই কমান্ডটা চালিয়ে আমাকে বলুন:
     </p>
-    <p class="meta" style="margin:0"><code>bash tools/serve_downloads.sh</code></p>
+    <p class="meta" style="margin:0"><code>bash tools/serve_downloads.sh</code> &nbsp;·&nbsp; নতুন করে রেন্ডার করতে <code>bash tools/serve_downloads.sh --force</code></p>
   </div>
 
-  <footer>Served from <code>/media</code> · branch <code>arena/413b5762-jewel</code></footer>
+  <footer>Served from <code>/media</code> · branch <code>arena/80cb9553-jewel</code></footer>
 </div>
 <script>
 document.querySelectorAll('[data-size]').forEach(async (el) => {

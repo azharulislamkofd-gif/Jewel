@@ -1,0 +1,17 @@
+A high-energy live rock concert performance. The gorgeous female rock star in sleek black leather attire stands center-stage, passionately singing into the handheld microphone while her free hand moves naturally to the rhythm. Her long blonde hair sways gently in the stage breeze, and her long leather skirt-coat flows slightly as she shifts her stance. Dramatic blue and golden spotlights pan across the stage, heavy smoke drifts over the floor, bright sparks flicker on the sides, and the cheering crowd waves glowing lights in the background. Smooth, slow cinematic camera orbit with a subtle push-in, ultra-realistic, 4k resolution, vibrant concert atmosphere.
+
+---
+Source still:  images/rock_singer_concert.jpg  (843 x 1264 portrait, supplied by the user)
+Renderer:     tools/make_concert_video.py
+Outputs:      media/rock_singer_live_concert.mp4      (1920x1080, 30fps, 20s, CRF 18)
+              media/rock_singer_live_concert_4k.mp4  (3840x2160, 30fps, 20s, Lanczos upscale)
+              media/rock_singer_live_concert_poster.jpg
+
+How it works: the renderer keeps the full-body portrait sharp in the centre of a
+16:9 stage built from de-focused edges of the same still, then adds a slow
+orbital parallax + push-in, panning cyan/gold spotlight beams, drifting fractal
+smoke, flickering side sparks, beat-pulsed crowd glows and a gentle localised
+warp for hair / skirt-coat / stance. It is a procedural animation of one still,
+not a generative video model, so no new bodily motion or audio is synthesised.
+The 4K file is a Lanczos upscale of the 1080p master; fine detail is limited by
+the 843 px wide source still.

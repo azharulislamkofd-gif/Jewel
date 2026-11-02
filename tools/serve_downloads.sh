@@ -14,14 +14,20 @@ cd "$(dirname "$0")/.."
 PORT="${PORT:-8000}"
 MODE="${1:-}"
 MEDIA_DIR="media"
+CONCERT_SRC="images/rock_singer_concert.jpg"
+CONCERT_OUT="${MEDIA_DIR}/rock_singer_live_concert.mp4"
+CONCERT_4K="${MEDIA_DIR}/rock_singer_live_concert_4k.mp4"
 
-echo "[1/4] installing deps (Pillow + bundled ffmpeg)"
-python3 -m pip install --quiet --break-system-packages Pillow imageio-ffmpeg \
-  || python3 -m pip install --quiet --user Pillow imageio-ffmpeg
+echo "[1/4] installing deps (Pillow + bundled ffmpeg + OpenCV)"
+python3 -m pip install --quiet --break-system-packages \
+  Pillow imageio-ffmpeg numpy opencv-python-headless \
+  || python3 -m pip install --quiet --user \
+     Pillow imageio-ffmpeg numpy opencv-python-headless
 
 echo "[2/4] preparing ${MEDIA_DIR}/"
 mkdir -p "$MEDIA_DIR"
 cp -f images/*.png "$MEDIA_DIR"/ 2>/dev/null || true
+cp -f "$CONCERT_SRC" "${MEDIA_DIR}/rock_singer_concert_still.jpg" 2>/dev/null || true
 
 echo "[3/4] rendering videos"
 for spec in "tech_review_studio:tech_review_cinematic" "rock_singer_stage:rock_singer_cinematic"; do
@@ -37,6 +43,20 @@ for spec in "tech_review_studio:tech_review_cinematic" "rock_singer_stage:rock_s
   fi
   python3 tools/make_video.py "$src" "$out" --w 1920 --h 1080 --fps 30 --crf 19
 done
+
+# Concert brief: procedural animation from the portrait still (1080p master + 4K).
+if [[ -f "$CONCERT_SRC" ]]; then
+  if [[ -f "$CONCERT_OUT" && -f "$CONCERT_4K" && "$MODE" != "--force" ]]; then
+    echo "  exists: $CONCERT_OUT + $CONCERT_4K (use --force to re-render)"
+  else
+    python3 tools/make_concert_video.py "$CONCERT_SRC" "$CONCERT_OUT" \
+      --seconds 20 --fps 30 --crf 18 --preset fast \
+      --fourk "$CONCERT_4K" --fourk-crf 22 \
+      --poster "${MEDIA_DIR}/rock_singer_live_concert_poster.jpg"
+  fi
+else
+  echo "  skip: $CONCERT_SRC not found"
+fi
 
 ls -lh "$MEDIA_DIR"/
 
