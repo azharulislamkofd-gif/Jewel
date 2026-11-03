@@ -36,3 +36,12 @@ google-services.json
 
 # Scratch output (regenerable); tracked assets live in media/
 downloads/
+
+# work-in-progress media (regenerable intermediates); scene source stills are kept
+media/work/*
+!media/work/scenes/
+!media/work/plan.json
+# oversized final render stays out of git (served from the workspace instead)
+media/final_rock_music_video.mp4
+__pycache__/
+*.pyc
