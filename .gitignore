@@ -45,3 +45,7 @@ media/work/*
 media/final_rock_music_video.mp4
 __pycache__/
 *.pyc
+
+# public /download route aliases (symlinks) and the 4K derivative
+media/download/
+media/rock_singer_live_concert_4k.mp4
